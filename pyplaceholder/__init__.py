@@ -13,7 +13,7 @@ __title__ = 'pypodadmin'
 
 __url__ = 'https://github.com/EricDalrymple91/pyplaceholder'
 
-__version__ = '0.1'
+__version__ = '0.2'
 
 __author__ = 'Eric Dalrymple'
 
@@ -26,6 +26,12 @@ __copyright__ = 'Copyright 2021 MIT'
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logging.getLogger("requests").setLevel(logging.WARNING)
+
+TIMEOUT = 30
+
+RAISE_STATUS = True
+
+RESPONSE_AS_JSON = True
 
 
 def set_logfile(file_path):
@@ -72,6 +78,7 @@ def request(method, url, **kwargs):
 
     logger.debug(f'[{request_name}] {response.content}')
 
-    raise_status(response)
+    if RAISE_STATUS:
+        raise_status(response)
 
-    return response
+    return response.json() if RESPONSE_AS_JSON else response

@@ -70,15 +70,16 @@ class JSONPlaceholder(object):
     def __init__(self):
         self.base_url = 'https://jsonplaceholder.typicode.com'
 
-    def _get_response(self, endpoint):
+    def _get_response(self, endpoint, http_method='get', data=None):
         url = f'{self.base_url}/{endpoint}'
 
         response = pyplaceholder.request(
-            'get',
-            url
+            http_method,
+            url,
+            json=data
         )
 
-        return response.json()
+        return response
 
     def get_albums(self):
         """ Get albums.
@@ -166,15 +167,7 @@ class JSONPlaceholder(object):
         :param data:
         :return: JSON response as dict.
         """
-        url = f'{self.base_url}/posts'
-
-        response = pyplaceholder.request(
-            'post',
-            url,
-            json=data
-        )
-
-        return response.json()
+        return self._get_response('posts', 'post', data)
 
     def update_post(self, post_id, data):
         """ Create a post.
@@ -195,15 +188,7 @@ class JSONPlaceholder(object):
         :param data:
         :return: JSON response as dict.
         """
-        url = f'{self.base_url}/posts/{post_id}'
-
-        response = pyplaceholder.request(
-            'put',
-            url,
-            json=data
-        )
-
-        return response.json()
+        return self._get_response(f'posts/{post_id}', 'put', data)
 
     def delete_post(self, post_id):
         """ Delete a post.
@@ -217,14 +202,7 @@ class JSONPlaceholder(object):
         :param post_id:
         :return: JSON response as dict.
         """
-        url = f'{self.base_url}/posts/{post_id}'
-
-        response = pyplaceholder.request(
-            'delete',
-            url
-        )
-
-        return response.json()
+        return self._get_response(f'posts/{post_id}', 'delete')
 
     def get_todos(self):
         """ Get todos.

@@ -6,6 +6,7 @@ A simple python (3.6+) wrapper for [JSON Placeholder free fake API](#https://jso
 
 + [Installation](#installation)
 + [Usage](#usage)
++ [Tests](#tests)  
 + [Changelog](#changelog)
 
 # Installation
@@ -73,7 +74,36 @@ for user in ph.get_users():
     pyplaceholder.logger.info(user)
 ```
 
+# Tests
+
+Run basic tests via shell/terminal/cmd. 
+
+1. Create a virtualenv
+    ```
+    pip install virtualenv
+    cd /
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install requests
+    deactivate  # Only if you want to end the venv
+    ```
+
+2. Install the package to your venv
+    ```
+    python setup.py install
+    ```
+
+3. Run the tests
+    ```
+    python tests.py
+    ```
+
 # Changelog
+
+### 0.2 (2/2/22)
+
+- Added tests.
+- General cleanup.
 
 ### 0.1 (6/20/21)
 
