@@ -14,7 +14,6 @@ setup(
     url='https://github.com/EricDalrymple91/pyplaceholder',
     download_url='https://github.com/EricDalrymple91/pyplaceholder/tarball/0.1',
     classifiers=[
-        'License :: Apple Internal',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Text Processing',
     ],
