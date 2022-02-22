@@ -3,13 +3,15 @@ import logging
 import inspect
 import time
 import requests
+from requests.models import Response
+import json
 
 
 __all__ = [
     'jsonplaceholder',
 ]
 
-__title__ = 'pypodadmin'
+__title__ = 'pyplaceholder'
 
 __url__ = 'https://github.com/EricDalrymple91/pyplaceholder'
 
@@ -67,7 +69,25 @@ def request(method, url, **kwargs):
     # Send request and log time taken
     start_time = time.time()
 
-    response = requests.request(method, url, **kwargs)
+    try:
+        response = requests.request(method, url, **kwargs, timeout=TIMEOUT)
+    except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as error:
+        if 'timeout' in str(error):
+            response = Response()
+            response.code = "request_timeout"
+            response.error_type = "request_timeout"
+            response.status_code = 408
+            response.url = url
+            response._content = str.encode(json.dumps({'error': f'Timed out after {TIMEOUT} seconds'}))
+            logger.debug(f'PyPlaceholder forced timeout after {TIMEOUT} seconds')
+        else:
+            response = Response()
+            response.code = "internal_server"
+            response.error_type = "internal_server"
+            response.status_code = 500
+            response.url = url
+            response._content = str.encode(json.dumps({'error': str(error)}))
+            logger.debug(f'Request error: {str(error)}')
 
     logger.info(f'[{request_name}] Took: {time.time() - start_time} s')
 
