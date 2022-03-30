@@ -83,6 +83,7 @@ Run test:
 ```
 poetry shell
 pytest
+pytest -m "posts"
 ```
 
 # Changelog
