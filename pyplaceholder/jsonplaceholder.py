@@ -1,7 +1,3 @@
-"""
-Free fake API routes from https://jsonplaceholder.typicode.com/
-
-"""
 import pyplaceholder
 
 

@@ -1,6 +1,6 @@
 # PyPlaceholder
 
-A simple python (3.6+) wrapper for [JSON Placeholder free fake API](#https://jsonplaceholder.typicode.com/).
+A simple python (3.6+) wrapper for [JSON Placeholder free fake API](https://jsonplaceholder.typicode.com/).
 
 # Table of contents
 
@@ -11,9 +11,11 @@ A simple python (3.6+) wrapper for [JSON Placeholder free fake API](#https://jso
 
 # Installation
 
-go [here](https://github.com/EricDalrymple91/pyplaceholder) and either clone the repo or download the zip file and run the setup.py file:
+1. go [here](https://github.com/EricDalrymple91/pyplaceholder) and clone the repo
+2. Install [Poetry](https://python-poetry.org/docs/)
+3. Run the following:
 
-    python setup.py install
+    poetry install
 
 # Usage
 
@@ -76,27 +78,13 @@ for user in ph.get_users():
 
 # Tests
 
-Run basic tests via shell/terminal/cmd. 
+Run test:
 
-1. Create a virtualenv
-    ```
-    pip install virtualenv
-    cd /
-    python3 -m venv venv
-    source venv/bin/activate
-    pip install requests
-    deactivate  # Only if you want to end the venv
-    ```
-
-2. Install the package to your venv
-    ```
-    python setup.py install
-    ```
-
-3. Run the tests
-    ```
-    python tests.py
-    ```
+```
+poetry shell
+pytest
+pytest -m "posts"
+```
 
 # Changelog
 

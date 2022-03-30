@@ -69,5 +69,3 @@ target/
 .idea
 
 venv/
-
-tests.py
